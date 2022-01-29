@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <meta name="copyright" content="MACode ID, https://macodeid.com/">
+  <title>COVID-19 - GEOPORTAIL MAROC</title>
+
+  <link rel="stylesheet" href="../assets/css/maicons.css">
+
+  <link rel="stylesheet" href="../assets/css/bootstrap.css">
+
+  <link rel="stylesheet" href="../assets/vendor/owl-carousel/css/owl.carousel.css">
+
+  <link rel="stylesheet" href="../assets/vendor/animate/animate.css">
+
+  <link rel="stylesheet" href="../assets/css/theme.css">
+  
+  <link rel="icon" href="../assets/img/icon_covid19.png">
+
+  <link rel="stylesheet" href="C:\Users\USER\OneDrive\Documents\Cours 3CI\Webmapping\One Health Free Website Template - Free-CSS.com\one-health\css\leaflet.css" />
+
+  <link rel="stylesheet" href="C:\Users\USER\OneDrive\Documents\Cours 3CI\Webmapping\One Health Free Website Template - Free-CSS.com\one-health\assets\css\theme.css" />
+
+  <script src="C:\Users\USER\OneDrive\Documents\Cours 3CI\Webmapping\One Health Free Website Template - Free-CSS.com\one-health\js\leaflet.js"></script>
+
+  <script src="C:\Users\USER\OneDrive\Documents\Cours 3CI\Webmapping\One Health Free Website Template - Free-CSS.com\one-health\src\leaflet-timeline-slider.js"></script>
+
+	<script src="C:\Users\USER\OneDrive\Documents\Cours 3CI\Webmapping\One Health Free Website Template - Free-CSS.com\one-health\js\jquery-3.6.0.js"></script>
+
+  <script src="C:\Users\USER\OneDrive\Documents\Cours 3CI\Webmapping\One Health Free Website Template - Free-CSS.com\one-health\js\leaflet-timeline-slider.js"></script>
+</head>
+
+<body>
+  <!-- Back to top button -->
+  <div class="back-to-top"></div>
+
+  <header>
+    <div class="topbar">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-8 text-sm">
+            <div class="site-info">
+              <a href="#"><span class="mai-call text-primary"></span> +212 648-014271</a>
+              <span class="divider">|</span>
+              <a href="#"><span class="mai-mail text-primary"></span> ibtihal_elmaghraoui@gmail.com</a>
+            </div>
+          </div>
+          <div class="col-sm-4 text-right text-sm">
+          </div>
+        </div> <!-- .row -->
+      </div> <!-- .container -->
+    </div> <!-- .topbar -->
+
+    <nav class="navbar navbar-expand-lg navbar-light shadow-sm">
+      <div class="container">
+        <a class="navbar-brand" href="#"><span class="text-primary">COVID-19</span> GEOPORTAIL</a>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupport" aria-controls="navbarSupport" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupport">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="index.html">Acceuil</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="provinces.html">Provinces</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="about.html">Infos</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="contact.html">Contact</a>
+          
+          </ul>
+        </div> <!-- .navbar-collapse -->
+      </div> <!-- .container -->
+    </nav>
+  </header>
+
+  <div class="page-hero bg-image overlay-dark" style="background-image: url(../assets/img/img_covid.jpg);">
+    <div class="hero-section">
+      <div class="container text-center wow zoomIn">
+        <span class="subhead">Evolution de la situation pandémique dans la région de Casablanca-Settat</span>
+        <h1 class="display-4">COVID-19 CASES</h1>
+      </div>
+    </div>
+  </div>
+
+</div> <!-- .page-section -->
+    <style>
+		#map {
+			width: 800px;
+			height: 600px;
+		}
+        .info {
+		    padding: 6px 8px;
+            color: white;
+		    font: 14px/16px Arial, Helvetica, sans-serif;
+		    background:rgba(194, 107, 107, 0.808);
+		    background: rgba(199, 97, 97, 0.753);
+		    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+		    border-radius: 5px;
+		}
+		.info h4 {
+		    margin: 0 0 5px;
+		    color: #0c0c0c;
+		}
+        .legend {
+           line-height: 18px;
+           color: #0f0f0f;
+        }
+        .legend i {
+           width: 18px;
+           height: 18px;
+           float: left;
+           margin-right: 8px;
+           opacity: 1;
+}
+	</style>
+<body>
+  <div class="page-section">
+    <div class="container">
+      <h1 class="text-center wow fadeInUp">Visualisation des cas confirmés par province</h1>
+      <form class="main-form">
+        <div class="row mt-5 ">
+          <div class="col-12 col-sm-6 py-2 wow fadeInLeft">
+          </div>
+       <div id='map'></div>
+       <script type="text/javascript" src="C:\Users\USER\OneDrive\Documents\Cours 3CI\Webmapping\One Health Free Website Template - Free-CSS.com\one-health\js\ProvincesCasa.js"></script>
+       <script type="text/javascript">
+            
+
+            var mymap = L.map('map').setView([33.939006, -6.886224], 7);
+            
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(mymap);
+
+            var geoJson =L.geoJson(ProvincesCasa)
+            
+            function getColor(attribut) {
+                return attribut > 100 ? '#bd0026' :
+                       attribut > 30 ? '#f03b20' :
+                       attribut > 20 ? '#fd8d3c' :
+                       attribut > 10 ?'#fecc5c' :
+                       attribut > 5 ? '#fed976' :
+                       attribut >= 0 ? '#ffffb2' :
+                                            '#FFFFFF';
+            }
+            function stylisermonFeature(feature) {
+                return {
+			        weight: 2,
+			        opacity: 1,
+			        color: 'black',
+			        /*dashArray: '3',*/
+			        fillOpacity: 1,
+			        fillColor: getColor(feature.properties.cas)
+		        };
+	        }
+
+            function highlightFeature(e) {
+	            var layer = e.target;
+
+	            layer.setStyle({
+	                weight: 5,
+	                color: '#666',
+	                dashArray: '',
+	                fillOpacity: 0.7
+	        });
+
+	            if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
+	            layer.bringToFront();
+	            }
+	            info.update(layer.feature.properties);
+
+	        }
+
+            function resetHighlight(e) {
+    	        geojson.resetStyle(e.target);
+    	            info.update();
+
+	        }
+            function zoomToFeature(e) {
+                map.fitBounds(e.target.getBounds());
+            }
+
+            function onEachFeature(feature, layer) {
+            layer.on({
+                mouseover: highlightFeature,
+                mouseout: resetHighlight,
+                click: zoomToFeature,
+        
+            });
+            
+        
+            }
+            
+        var info = L.control(); 
+            
+
+        info.onAdd = function (mymap) {
+            this._div = L.DomUtil.create('div', 'info'); 
+            this.update();
+            return this._div;
+        };
+
+
+        info.update = function (props) {
+            this._div.innerHTML = '<h4>Nombre de cas confirmés par Province</h4>' +  (props ?
+                 props.Nom_Provin+ '</b> <br />Nb de cas positifs : ' + props.cas + '</sup>'
+                : 'Vous êtes hors la région de Casablanca-Settat!');
+        };
+
+        info.addTo(mymap);
+
+        getDataAddMarkers = function( {label, value, map, exclamation} ) {
+                map.eachLayer(function (layer) {
+                        if (layer instanceof L.Marker) {
+                            map.removeLayer(layer);
+                        }
+                });
+
+                filteredData = ProvincesCasa.features.filter(function (i, n) {
+                    return i.properties.Jour===label;
+                    });
+
+                /*var markerArray = [];*/
+                
+                geojson = L.geoJson(filteredData, {
+                    style: stylisermonFeature,
+                    onEachFeature: onEachFeature,
+                        /*content = `${exclamation} <br> ${feature.properties.content} `
+                        var popup = L.popup().setContent(content);
+                        layer.bindPopup(popup);
+                        markerArray.push(layer);
+                        layer.on({
+                            mouseover: highlightFeature,
+                            mouseout: resetHighlight,
+        
+                        })
+                    }*/
+                }).addTo(mymap);
+                
+                /*var markerGroup = L.featureGroup(markerArray);
+                map.fitBounds(markerGroup.getBounds()).setZoom(8);*/
+            };
+
+            L.control.timelineSlider({
+                timelineItems: ["23/12/21", "24/12/21", "25/12/21", "26/12/21", "27/12/21", "28/12/21","29/12/21"], 
+                changeMap: getDataAddMarkers,
+                extraChangeMapParams: {exclamation: "ProvincesCasa.feature.properties.Nom_Provin"} })
+            .addTo(mymap);
+            var legend = L.control({ position: "topleft" });
+
+        legend.onAdd = function (mymap) {
+          var div = L.DomUtil.create("div", "info legend"),
+            grades = [0, 5, 10, 20, 30, 100],
+            labels = [];
+
+  
+          for (var i = 0; i < grades.length; i++) {
+            div.innerHTML +=
+            '<i style="background:' +
+            getColor(grades[i] + 1) +
+            '"></i> ' +
+            grades[i] +
+            (grades[i + 1] ? "&ndash;" + grades[i + 1] + "<br>" : "+");
+          }
+
+          return div;
+        };
+
+        legend.addTo(mymap);    
+
+
+        </script>
+</body>
+
+</html>
+
+  <div class="page-section">
+    <div class="container">
+      <div class="container text-center wow zoomIn"></div>
+      <form class="main-form">
+        <div class="row mt-6 ">
+      <span class="text-center subhead">Si vous voulez des informations sur les cas confirmés dans d'autres dates, déposez votre demande ci-joint :</span>
+    </div>
+      <form class="main-form">
+        <div class="row mt-5 ">
+          <div class="col-12 col-sm-6 py-2 wow fadeInLeft">
+          </div>
+          <div class="col-12 col-sm-6 py-2 wow fadeInRight">
+          </div>
+          <div class="col-12 col-sm-6 py-2 wow fadeInLeft" data-wow-delay="300ms">
+            <input type="date" class="form-control">
+          </div>
+          <div class="col-12 col-sm-6 py-2 wow fadeInRight" data-wow-delay="300ms">
+            <select name="ProvincesCasaince" id="ProvincesCasa" class="custom-select">
+              <option value="ProvincesCasa">Casablanca</option>
+              <option value="ProvincesCasa">Mohammedia</option>
+              <option value="ProvincesCasa">El Jadida</option>
+              <option value="ProvincesCasa">Settat</option>
+              <option value="ProvincesCasa">Benslimane</option>
+              <option value="ProvincesCasa">Sidi Bennour</option>
+              <option value="ProvincesCasa">Mediouna</option>
+              <option value="ProvincesCasa">Nouaceur</option>
+              <option value="ProvincesCasa">Berrechid</option>
+            </select>
+          </div>
+        <button type="submit" class="btn btn-primary mt-3 wow zoomIn">Envoyer</button>
+      </form>
+    </div>
+      <hr>
+      <p id="copyright">Copyright &copy; 2022 El Maghraoui Ibtihal</p>
+    </div>
+  </body>
+</html>
